@@ -1,0 +1,42 @@
+﻿@model HilfsToolFuerTrainerV1.Models.T_Mannschaft
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Mannschaft</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Event.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Event.Bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Inventar.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Inventar.Bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_Spieler.Vorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_Spieler.Vorname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

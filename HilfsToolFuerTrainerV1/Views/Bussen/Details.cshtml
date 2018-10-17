@@ -1,0 +1,50 @@
+﻿@model HilfsToolFuerTrainerV1.Models.T_Bussen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Grund)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grund)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Betrag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Betrag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.istBezahlt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.istBezahlt)
+        </dd>
+        <!--
+        <dt>
+            @Html.DisplayNameFor(model => model.FK_Spieler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FK_Spieler)
+        </dd>
+        -->
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

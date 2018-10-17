@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HilfsToolFuerTrainerV1.Models.T_Absenzen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Absenzen Liste</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VonDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BisDatum)
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.FK_Spieler)
+        </th>
+        -->
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VonDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BisDatum)
+        </td>
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.FK_Spieler)
+        </td>
+        -->
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

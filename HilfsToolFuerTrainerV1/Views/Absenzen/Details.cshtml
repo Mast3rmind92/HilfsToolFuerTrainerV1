@@ -1,0 +1,50 @@
+﻿@model HilfsToolFuerTrainerV1.Models.T_Absenzen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VonDatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VonDatum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BisDatum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BisDatum)
+        </dd>
+        <!--
+        <dt>
+            @Html.DisplayNameFor(model => model.FK_Spieler)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FK_Spieler)
+        </dd>
+        -->
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

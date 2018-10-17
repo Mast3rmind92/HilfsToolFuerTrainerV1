@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HilfsToolFuerTrainerV1.Models.T_Mannschaft>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Event.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Inventar.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_Spieler.Vorname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Event.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Inventar.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_Spieler.Vorname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

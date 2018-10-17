@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HilfsToolFuerTrainerV1.Models.T_Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Event Liste</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.FK_Mannschaft)
+        </th>
+        -->
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.FK_Mannschaft)
+        </td>
+        -->
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
