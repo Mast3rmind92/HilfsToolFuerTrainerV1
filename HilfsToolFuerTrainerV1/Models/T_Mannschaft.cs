@@ -18,9 +18,11 @@ namespace HilfsToolFuerTrainerV1.Models
         public Nullable<int> FK_Spieler { get; set; }
         public Nullable<int> FK_Inventar { get; set; }
         public Nullable<int> FK_Event { get; set; }
+        public Nullable<int> FK_SpielBericht { get; set; }
     
         public virtual T_Event T_Event { get; set; }
         public virtual T_Inventar T_Inventar { get; set; }
         public virtual T_Spieler T_Spieler { get; set; }
+        public virtual SpielBericht SpielBericht { get; set; }
     }
 }

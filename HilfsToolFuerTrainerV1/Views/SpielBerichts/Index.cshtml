@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HilfsToolFuerTrainerV1.Models.SpielBericht>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Spiel Berichte</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VereinsNamen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpielOrt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Taktik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Benotung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bericht)
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.FK_Mannschaft)
+        </th>
+        -->
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VereinsNamen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpielOrt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Taktik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Benotung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bericht)
+        </td>
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.FK_Mannschaft)
+        </td>
+        -->
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

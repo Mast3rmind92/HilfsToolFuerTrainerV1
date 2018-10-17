@@ -198,6 +198,7 @@
     <Compile Include="Controllers\InventarController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MannschaftController.cs" />
+    <Compile Include="Controllers\SpielBerichtsController.cs" />
     <Compile Include="Controllers\SpielerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +220,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MannschaftModell.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpielBericht.cs">
+      <DependentUpon>MannschaftModell.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>MannschaftModell.tt</DependentUpon>
@@ -370,6 +374,11 @@
     <Content Include="Views\Mannschaft\Details.cshtml" />
     <Content Include="Views\Mannschaft\Edit.cshtml" />
     <Content Include="Views\Mannschaft\Index.cshtml" />
+    <Content Include="Views\SpielBerichts\Create.cshtml" />
+    <Content Include="Views\SpielBerichts\Delete.cshtml" />
+    <Content Include="Views\SpielBerichts\Details.cshtml" />
+    <Content Include="Views\SpielBerichts\Edit.cshtml" />
+    <Content Include="Views\SpielBerichts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

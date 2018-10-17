@@ -1,0 +1,66 @@
+﻿@model HilfsToolFuerTrainerV1.Models.SpielBericht
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VereinsNamen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VereinsNamen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpielOrt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpielOrt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taktik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taktik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Benotung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Benotung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bericht)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bericht)
+        </dd>
+        <!--
+        <dt>
+            @Html.DisplayNameFor(model => model.FK_Mannschaft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FK_Mannschaft)
+        </dd>
+        -->
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

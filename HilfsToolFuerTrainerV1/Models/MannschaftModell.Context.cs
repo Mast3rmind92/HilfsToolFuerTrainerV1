@@ -33,5 +33,6 @@ namespace HilfsToolFuerTrainerV1.Models
         public virtual DbSet<T_Inventar> T_Inventar { get; set; }
         public virtual DbSet<T_Mannschaft> T_Mannschaft { get; set; }
         public virtual DbSet<T_Spieler> T_Spieler { get; set; }
+        public virtual DbSet<SpielBericht> SpielBericht { get; set; }
     }
 }
