@@ -21,6 +21,9 @@
         <AssociationConnector Association="HilfsToolfuerTrainerModel.FK_T_Mannschaft_T_Spieler" ManuallyRouted="false" />
         <EntityTypeShape EntityType="HilfsToolfuerTrainerModel.SpielBericht" Width="1.5" PointX="7.375" PointY="1" />
         <AssociationConnector Association="HilfsToolfuerTrainerModel.FK_T_Mannschaft_SpielBericht" />
+        <AssociationConnector Association="HilfsToolfuerTrainerModel.FK_T_Absenzen_T_Spieler" />
+        <AssociationConnector Association="HilfsToolfuerTrainerModel.FK_T_Anwesenheit_T_Spieler" />
+        <AssociationConnector Association="HilfsToolfuerTrainerModel.FK_T_Bussen_T_Spieler" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

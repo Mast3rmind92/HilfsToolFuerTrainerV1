@@ -17,7 +17,8 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // GET: Absenzen
         public ActionResult Index()
         {
-            return View(db.T_Absenzen.ToList());
+            var t_Absenzen = db.T_Absenzen.Include(t => t.T_Spieler1);
+            return View(t_Absenzen.ToList());
         }
 
         // GET: Absenzen/Details/5
@@ -38,6 +39,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // GET: Absenzen/Create
         public ActionResult Create()
         {
+            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname");
             return View();
         }
 
@@ -55,6 +57,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Absenzen.FK_Spieler);
             return View(t_Absenzen);
         }
 
@@ -70,6 +73,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Absenzen.FK_Spieler);
             return View(t_Absenzen);
         }
 
@@ -86,6 +90,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Absenzen.FK_Spieler);
             return View(t_Absenzen);
         }
 

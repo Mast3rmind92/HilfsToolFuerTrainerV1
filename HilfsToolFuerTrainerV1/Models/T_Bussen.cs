@@ -28,5 +28,6 @@ namespace HilfsToolFuerTrainerV1.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_Spieler> T_Spieler { get; set; }
+        public virtual T_Spieler T_Spieler1 { get; set; }
     }
 }

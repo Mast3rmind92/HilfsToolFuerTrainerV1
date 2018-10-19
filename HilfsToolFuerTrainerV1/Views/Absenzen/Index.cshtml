@@ -20,11 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.BisDatum)
         </th>
-        <!--
         <th>
-            @Html.DisplayNameFor(model => model.FK_Spieler)
+            @Html.DisplayNameFor(model => model.T_Spieler1.Vorname)
         </th>
-        -->
         <th></th>
     </tr>
 
@@ -39,11 +37,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.BisDatum)
         </td>
-        <!--
         <td>
-            @Html.DisplayFor(modelItem => item.FK_Spieler)
+            @Html.DisplayFor(modelItem => item.T_Spieler1.Vorname)
         </td>
-        -->
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |

@@ -18,6 +18,9 @@ namespace HilfsToolFuerTrainerV1.Models
         public T_Spieler()
         {
             this.T_Mannschaft = new HashSet<T_Mannschaft>();
+            this.T_Absenzen1 = new HashSet<T_Absenzen>();
+            this.T_Anwesenheit1 = new HashSet<T_Anwesenheit>();
+            this.T_Bussen1 = new HashSet<T_Bussen>();
         }
     
         public int ID { get; set; }
@@ -33,5 +36,11 @@ namespace HilfsToolFuerTrainerV1.Models
         public virtual T_Bussen T_Bussen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_Mannschaft> T_Mannschaft { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Absenzen> T_Absenzen1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Anwesenheit> T_Anwesenheit1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Bussen> T_Bussen1 { get; set; }
     }
 }
