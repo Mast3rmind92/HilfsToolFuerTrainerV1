@@ -17,8 +17,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // GET: Anwesenheit
         public ActionResult Index()
         {
-            var t_Anwesenheit = db.T_Anwesenheit.Include(t => t.T_Spieler1);
-            return View(t_Anwesenheit.ToList());
+            return View(db.T_Anwesenheit.ToList());
         }
 
         // GET: Anwesenheit/Details/5
@@ -39,7 +38,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // GET: Anwesenheit/Create
         public ActionResult Create()
         {
-            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname");
+            ViewBag.Spieler = db.T_Spieler.ToList();
             return View();
         }
 
@@ -48,8 +47,9 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Bezeichnung,Datum,istTraining,FK_Spieler")] T_Anwesenheit t_Anwesenheit)
+        public ActionResult Create([Bind(Include = "ID,Bezeichnung,Datum,istTraining")] T_Anwesenheit t_Anwesenheit)
         {
+            ViewBag.Spieler = db.T_Spieler.ToList();
             if (ModelState.IsValid)
             {
                 db.T_Anwesenheit.Add(t_Anwesenheit);
@@ -57,7 +57,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Anwesenheit.FK_Spieler);
             return View(t_Anwesenheit);
         }
 
@@ -73,7 +72,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Anwesenheit.FK_Spieler);
             return View(t_Anwesenheit);
         }
 
@@ -82,7 +80,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Bezeichnung,Datum,istTraining,FK_Spieler")] T_Anwesenheit t_Anwesenheit)
+        public ActionResult Edit([Bind(Include = "ID,Bezeichnung,Datum,istTraining")] T_Anwesenheit t_Anwesenheit)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +88,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FK_Spieler = new SelectList(db.T_Spieler, "ID", "Vorname", t_Anwesenheit.FK_Spieler);
             return View(t_Anwesenheit);
         }
 

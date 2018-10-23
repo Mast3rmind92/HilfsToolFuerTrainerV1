@@ -17,10 +17,10 @@ namespace HilfsToolFuerTrainerV1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_Spieler()
         {
+            this.T_Absenzen = new HashSet<T_Absenzen>();
+            this.T_Bussen = new HashSet<T_Bussen>();
             this.T_Mannschaft = new HashSet<T_Mannschaft>();
-            this.T_Absenzen1 = new HashSet<T_Absenzen>();
-            this.T_Anwesenheit1 = new HashSet<T_Anwesenheit>();
-            this.T_Bussen1 = new HashSet<T_Bussen>();
+            this.T_SpielerAnwesenheit = new HashSet<T_SpielerAnwesenheit>();
         }
     
         public int ID { get; set; }
@@ -28,19 +28,17 @@ namespace HilfsToolFuerTrainerV1.Models
         public string Nachname { get; set; }
         public string TelefonNr { get; set; }
         public Nullable<int> FK_Absenzen { get; set; }
-        public Nullable<int> FK_Anwesenheit { get; set; }
         public Nullable<int> FK_Bussen { get; set; }
     
-        public virtual T_Absenzen T_Absenzen { get; set; }
-        public virtual T_Anwesenheit T_Anwesenheit { get; set; }
-        public virtual T_Bussen T_Bussen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Absenzen> T_Absenzen { get; set; }
+        public virtual T_Absenzen T_Absenzen1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Bussen> T_Bussen { get; set; }
+        public virtual T_Bussen T_Bussen1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_Mannschaft> T_Mannschaft { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Absenzen> T_Absenzen1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Anwesenheit> T_Anwesenheit1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Bussen> T_Bussen1 { get; set; }
+        public virtual ICollection<T_SpielerAnwesenheit> T_SpielerAnwesenheit { get; set; }
     }
 }

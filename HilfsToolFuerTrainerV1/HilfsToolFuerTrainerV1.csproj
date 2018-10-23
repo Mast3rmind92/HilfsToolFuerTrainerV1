@@ -204,49 +204,52 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HilfsToolFuerTrainerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HilfsToolFuerTrainerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HilfsToolFuerTrainerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HilfsToolFuerTrainerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HilfsToolFuerTrainerModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MannschaftModell.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MannschaftModell.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MannschaftModell.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MannschaftModell.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MannschaftModell.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\SpielBericht.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Absenzen.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Anwesenheit.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Bussen.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Event.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Inventar.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Mannschaft.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_Spieler.cs">
-      <DependentUpon>MannschaftModell.tt</DependentUpon>
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_SpielerAnwesenheit.cs">
+      <DependentUpon>HilfsToolFuerTrainerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -271,24 +274,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Models\MannschaftModell.Context.tt">
+    <Content Include="Models\HilfsToolFuerTrainerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MannschaftModell.edmx</DependentUpon>
-      <LastGenOutput>MannschaftModell.Context.cs</LastGenOutput>
+      <DependentUpon>HilfsToolFuerTrainerModel.edmx</DependentUpon>
+      <LastGenOutput>HilfsToolFuerTrainerModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\MannschaftModell.tt">
+    <Content Include="Models\HilfsToolFuerTrainerModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MannschaftModell.edmx</DependentUpon>
-      <LastGenOutput>MannschaftModell.cs</LastGenOutput>
+      <DependentUpon>HilfsToolFuerTrainerModel.edmx</DependentUpon>
+      <LastGenOutput>HilfsToolFuerTrainerModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\MannschaftModell.edmx">
+    <EntityDeploy Include="Models\HilfsToolFuerTrainerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MannschaftModell.Designer.cs</LastGenOutput>
+      <LastGenOutput>HilfsToolFuerTrainerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\MannschaftModell.edmx.diagram">
-      <DependentUpon>MannschaftModell.edmx</DependentUpon>
+    <Content Include="Models\HilfsToolFuerTrainerModel.edmx.diagram">
+      <DependentUpon>HilfsToolFuerTrainerModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -359,26 +362,26 @@
     <Content Include="Views\SpielBerichts\Details.cshtml" />
     <Content Include="Views\SpielBerichts\Edit.cshtml" />
     <Content Include="Views\SpielBerichts\Index.cshtml" />
-    <Content Include="Views\Spieler\Create.cshtml" />
-    <Content Include="Views\Spieler\Delete.cshtml" />
-    <Content Include="Views\Spieler\Details.cshtml" />
-    <Content Include="Views\Spieler\Edit.cshtml" />
-    <Content Include="Views\Spieler\Index.cshtml" />
     <Content Include="Views\Absenzen\Create.cshtml" />
     <Content Include="Views\Absenzen\Delete.cshtml" />
     <Content Include="Views\Absenzen\Details.cshtml" />
     <Content Include="Views\Absenzen\Edit.cshtml" />
     <Content Include="Views\Absenzen\Index.cshtml" />
-    <Content Include="Views\Anwesenheit\Create.cshtml" />
-    <Content Include="Views\Anwesenheit\Delete.cshtml" />
-    <Content Include="Views\Anwesenheit\Details.cshtml" />
-    <Content Include="Views\Anwesenheit\Edit.cshtml" />
-    <Content Include="Views\Anwesenheit\Index.cshtml" />
     <Content Include="Views\Bussen\Create.cshtml" />
     <Content Include="Views\Bussen\Delete.cshtml" />
     <Content Include="Views\Bussen\Details.cshtml" />
     <Content Include="Views\Bussen\Edit.cshtml" />
     <Content Include="Views\Bussen\Index.cshtml" />
+    <Content Include="Views\Anwesenheit\Create.cshtml" />
+    <Content Include="Views\Anwesenheit\Delete.cshtml" />
+    <Content Include="Views\Anwesenheit\Details.cshtml" />
+    <Content Include="Views\Anwesenheit\Edit.cshtml" />
+    <Content Include="Views\Anwesenheit\Index.cshtml" />
+    <Content Include="Views\Spieler\Create.cshtml" />
+    <Content Include="Views\Spieler\Delete.cshtml" />
+    <Content Include="Views\Spieler\Details.cshtml" />
+    <Content Include="Views\Spieler\Edit.cshtml" />
+    <Content Include="Views\Spieler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

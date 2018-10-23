@@ -25,6 +25,7 @@ namespace HilfsToolFuerTrainerV1.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<SpielBericht> SpielBericht { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<T_Absenzen> T_Absenzen { get; set; }
         public virtual DbSet<T_Anwesenheit> T_Anwesenheit { get; set; }
@@ -33,6 +34,6 @@ namespace HilfsToolFuerTrainerV1.Models
         public virtual DbSet<T_Inventar> T_Inventar { get; set; }
         public virtual DbSet<T_Mannschaft> T_Mannschaft { get; set; }
         public virtual DbSet<T_Spieler> T_Spieler { get; set; }
-        public virtual DbSet<SpielBericht> SpielBericht { get; set; }
+        public virtual DbSet<T_SpielerAnwesenheit> T_SpielerAnwesenheit { get; set; }
     }
 }

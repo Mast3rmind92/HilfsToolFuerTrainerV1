@@ -17,7 +17,7 @@ namespace HilfsToolFuerTrainerV1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_Absenzen()
         {
-            this.T_Spieler = new HashSet<T_Spieler>();
+            this.T_Spieler1 = new HashSet<T_Spieler>();
         }
     
         public int ID { get; set; }
@@ -26,8 +26,8 @@ namespace HilfsToolFuerTrainerV1.Models
         public Nullable<System.DateTime> BisDatum { get; set; }
         public Nullable<int> FK_Spieler { get; set; }
     
+        public virtual T_Spieler T_Spieler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Spieler> T_Spieler { get; set; }
-        public virtual T_Spieler T_Spieler1 { get; set; }
+        public virtual ICollection<T_Spieler> T_Spieler1 { get; set; }
     }
 }

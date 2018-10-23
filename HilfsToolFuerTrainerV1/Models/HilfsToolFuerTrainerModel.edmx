@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HilfsToolfuerTrainerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HilfsToolfuerTrainerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SpielBericht">
           <Key>
             <PropertyRef Name="ID" />
@@ -47,7 +47,6 @@
           <Property Name="Bezeichnung" Type="varchar" MaxLength="50" />
           <Property Name="Datum" Type="date" />
           <Property Name="istTraining" Type="bit" />
-          <Property Name="FK_Spieler" Type="int" />
         </EntityType>
         <EntityType Name="T_Bussen">
           <Key>
@@ -97,8 +96,15 @@
           <Property Name="Nachname" Type="varchar" MaxLength="50" />
           <Property Name="TelefonNr" Type="varchar" MaxLength="50" />
           <Property Name="FK_Absenzen" Type="int" />
-          <Property Name="FK_Anwesenheit" Type="int" />
           <Property Name="FK_Bussen" Type="int" />
+        </EntityType>
+        <EntityType Name="T_SpielerAnwesenheit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="FK_Spieler" Type="int" />
+          <Property Name="FK_Anwesenheit" Type="int" />
         </EntityType>
         <Association Name="FK_T_Absenzen_T_Spieler">
           <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
@@ -108,18 +114,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="T_Absenzen">
-              <PropertyRef Name="FK_Spieler" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_Anwesenheit_T_Spieler">
-          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
-          <End Role="T_Anwesenheit" Type="Self.T_Anwesenheit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Spieler">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Anwesenheit">
               <PropertyRef Name="FK_Spieler" />
             </Dependent>
           </ReferentialConstraint>
@@ -196,18 +190,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_Spieler_T_Anwesenheit">
-          <End Role="T_Anwesenheit" Type="Self.T_Anwesenheit" Multiplicity="0..1" />
-          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Anwesenheit">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Spieler">
-              <PropertyRef Name="FK_Anwesenheit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_T_Spieler_T_Bussen">
           <End Role="T_Bussen" Type="Self.T_Bussen" Multiplicity="0..1" />
           <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="*" />
@@ -217,6 +199,30 @@
             </Principal>
             <Dependent Role="T_Spieler">
               <PropertyRef Name="FK_Bussen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SpielerAnwesenheit_T_Anwesenheit">
+          <End Role="T_Anwesenheit" Type="Self.T_Anwesenheit" Multiplicity="0..1" />
+          <End Role="T_SpielerAnwesenheit" Type="Self.T_SpielerAnwesenheit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Anwesenheit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_SpielerAnwesenheit">
+              <PropertyRef Name="FK_Anwesenheit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SpielerAnwesenheit_T_Spieler">
+          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
+          <End Role="T_SpielerAnwesenheit" Type="Self.T_SpielerAnwesenheit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Spieler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_SpielerAnwesenheit">
+              <PropertyRef Name="FK_Spieler" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -230,13 +236,10 @@
           <EntitySet Name="T_Inventar" EntityType="Self.T_Inventar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Mannschaft" EntityType="Self.T_Mannschaft" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Spieler" EntityType="Self.T_Spieler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SpielerAnwesenheit" EntityType="Self.T_SpielerAnwesenheit" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_T_Absenzen_T_Spieler" Association="Self.FK_T_Absenzen_T_Spieler">
             <End Role="T_Spieler" EntitySet="T_Spieler" />
             <End Role="T_Absenzen" EntitySet="T_Absenzen" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_Anwesenheit_T_Spieler" Association="Self.FK_T_Anwesenheit_T_Spieler">
-            <End Role="T_Spieler" EntitySet="T_Spieler" />
-            <End Role="T_Anwesenheit" EntitySet="T_Anwesenheit" />
           </AssociationSet>
           <AssociationSet Name="FK_T_Bussen_T_Spieler" Association="Self.FK_T_Bussen_T_Spieler">
             <End Role="T_Spieler" EntitySet="T_Spieler" />
@@ -262,19 +265,39 @@
             <End Role="T_Absenzen" EntitySet="T_Absenzen" />
             <End Role="T_Spieler" EntitySet="T_Spieler" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_Spieler_T_Anwesenheit" Association="Self.FK_T_Spieler_T_Anwesenheit">
-            <End Role="T_Anwesenheit" EntitySet="T_Anwesenheit" />
-            <End Role="T_Spieler" EntitySet="T_Spieler" />
-          </AssociationSet>
           <AssociationSet Name="FK_T_Spieler_T_Bussen" Association="Self.FK_T_Spieler_T_Bussen">
             <End Role="T_Bussen" EntitySet="T_Bussen" />
             <End Role="T_Spieler" EntitySet="T_Spieler" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_SpielerAnwesenheit_T_Anwesenheit" Association="Self.FK_T_SpielerAnwesenheit_T_Anwesenheit">
+            <End Role="T_Anwesenheit" EntitySet="T_Anwesenheit" />
+            <End Role="T_SpielerAnwesenheit" EntitySet="T_SpielerAnwesenheit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SpielerAnwesenheit_T_Spieler" Association="Self.FK_T_SpielerAnwesenheit_T_Spieler">
+            <End Role="T_Spieler" EntitySet="T_Spieler" />
+            <End Role="T_SpielerAnwesenheit" EntitySet="T_SpielerAnwesenheit" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HilfsToolfuerTrainerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SpielBericht">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VereinsNamen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SpielOrt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Taktik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Benotung" Type="Int32" />
+          <Property Name="Bericht" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Mannschaft" Type="Int32" />
+          <Property Name="Gewonnen" Type="Boolean" />
+          <Property Name="Resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_Mannschaft" Relationship="Self.FK_T_Mannschaft_SpielBericht" FromRole="SpielBericht" ToRole="T_Mannschaft" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -294,8 +317,8 @@
           <Property Name="VonDatum" Type="DateTime" Precision="0" />
           <Property Name="BisDatum" Type="DateTime" Precision="0" />
           <Property Name="FK_Spieler" Type="Int32" />
-          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Spieler_T_Absenzen" FromRole="T_Absenzen" ToRole="T_Spieler" />
-          <NavigationProperty Name="T_Spieler1" Relationship="HilfsToolfuerTrainerModel.FK_T_Absenzen_T_Spieler" FromRole="T_Absenzen" ToRole="T_Spieler" />
+          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Absenzen_T_Spieler" FromRole="T_Absenzen" ToRole="T_Spieler" />
+          <NavigationProperty Name="T_Spieler1" Relationship="Self.FK_T_Spieler_T_Absenzen" FromRole="T_Absenzen" ToRole="T_Spieler" />
         </EntityType>
         <EntityType Name="T_Anwesenheit">
           <Key>
@@ -305,9 +328,7 @@
           <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Datum" Type="DateTime" Precision="0" />
           <Property Name="istTraining" Type="Boolean" />
-          <Property Name="FK_Spieler" Type="Int32" />
-          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Spieler_T_Anwesenheit" FromRole="T_Anwesenheit" ToRole="T_Spieler" />
-          <NavigationProperty Name="T_Spieler1" Relationship="HilfsToolfuerTrainerModel.FK_T_Anwesenheit_T_Spieler" FromRole="T_Anwesenheit" ToRole="T_Spieler" />
+          <NavigationProperty Name="T_SpielerAnwesenheit" Relationship="Self.FK_T_SpielerAnwesenheit_T_Anwesenheit" FromRole="T_Anwesenheit" ToRole="T_SpielerAnwesenheit" />
         </EntityType>
         <EntityType Name="T_Bussen">
           <Key>
@@ -318,8 +339,8 @@
           <Property Name="Betrag" Type="Int32" />
           <Property Name="istBezahlt" Type="Boolean" />
           <Property Name="FK_Spieler" Type="Int32" />
-          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Spieler_T_Bussen" FromRole="T_Bussen" ToRole="T_Spieler" />
-          <NavigationProperty Name="T_Spieler1" Relationship="HilfsToolfuerTrainerModel.FK_T_Bussen_T_Spieler" FromRole="T_Bussen" ToRole="T_Spieler" />
+          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Bussen_T_Spieler" FromRole="T_Bussen" ToRole="T_Spieler" />
+          <NavigationProperty Name="T_Spieler1" Relationship="Self.FK_T_Spieler_T_Bussen" FromRole="T_Bussen" ToRole="T_Spieler" />
         </EntityType>
         <EntityType Name="T_Event">
           <Key>
@@ -350,11 +371,11 @@
           <Property Name="FK_Spieler" Type="Int32" />
           <Property Name="FK_Inventar" Type="Int32" />
           <Property Name="FK_Event" Type="Int32" />
+          <Property Name="FK_SpielBericht" Type="Int32" />
+          <NavigationProperty Name="SpielBericht" Relationship="Self.FK_T_Mannschaft_SpielBericht" FromRole="T_Mannschaft" ToRole="SpielBericht" />
           <NavigationProperty Name="T_Event" Relationship="Self.FK_T_Mannschaft_T_Event" FromRole="T_Mannschaft" ToRole="T_Event" />
           <NavigationProperty Name="T_Inventar" Relationship="Self.FK_T_Mannschaft_T_Inventar" FromRole="T_Mannschaft" ToRole="T_Inventar" />
           <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_Mannschaft_T_Spieler" FromRole="T_Mannschaft" ToRole="T_Spieler" />
-          <Property Name="FK_SpielBericht" Type="Int32" />
-          <NavigationProperty Name="SpielBericht" Relationship="HilfsToolfuerTrainerModel.FK_T_Mannschaft_SpielBericht" FromRole="T_Mannschaft" ToRole="SpielBericht" />
         </EntityType>
         <EntityType Name="T_Spieler">
           <Key>
@@ -365,16 +386,48 @@
           <Property Name="Nachname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TelefonNr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FK_Absenzen" Type="Int32" />
-          <Property Name="FK_Anwesenheit" Type="Int32" />
           <Property Name="FK_Bussen" Type="Int32" />
-          <NavigationProperty Name="T_Absenzen" Relationship="Self.FK_T_Spieler_T_Absenzen" FromRole="T_Spieler" ToRole="T_Absenzen" />
-          <NavigationProperty Name="T_Anwesenheit" Relationship="Self.FK_T_Spieler_T_Anwesenheit" FromRole="T_Spieler" ToRole="T_Anwesenheit" />
-          <NavigationProperty Name="T_Bussen" Relationship="Self.FK_T_Spieler_T_Bussen" FromRole="T_Spieler" ToRole="T_Bussen" />
+          <NavigationProperty Name="T_Absenzen" Relationship="Self.FK_T_Absenzen_T_Spieler" FromRole="T_Spieler" ToRole="T_Absenzen" />
+          <NavigationProperty Name="T_Absenzen1" Relationship="Self.FK_T_Spieler_T_Absenzen" FromRole="T_Spieler" ToRole="T_Absenzen" />
+          <NavigationProperty Name="T_Bussen" Relationship="Self.FK_T_Bussen_T_Spieler" FromRole="T_Spieler" ToRole="T_Bussen" />
+          <NavigationProperty Name="T_Bussen1" Relationship="Self.FK_T_Spieler_T_Bussen" FromRole="T_Spieler" ToRole="T_Bussen" />
           <NavigationProperty Name="T_Mannschaft" Relationship="Self.FK_T_Mannschaft_T_Spieler" FromRole="T_Spieler" ToRole="T_Mannschaft" />
-          <NavigationProperty Name="T_Absenzen1" Relationship="HilfsToolfuerTrainerModel.FK_T_Absenzen_T_Spieler" FromRole="T_Spieler" ToRole="T_Absenzen" />
-          <NavigationProperty Name="T_Anwesenheit1" Relationship="HilfsToolfuerTrainerModel.FK_T_Anwesenheit_T_Spieler" FromRole="T_Spieler" ToRole="T_Anwesenheit" />
-          <NavigationProperty Name="T_Bussen1" Relationship="HilfsToolfuerTrainerModel.FK_T_Bussen_T_Spieler" FromRole="T_Spieler" ToRole="T_Bussen" />
+          <NavigationProperty Name="T_SpielerAnwesenheit" Relationship="Self.FK_T_SpielerAnwesenheit_T_Spieler" FromRole="T_Spieler" ToRole="T_SpielerAnwesenheit" />
         </EntityType>
+        <EntityType Name="T_SpielerAnwesenheit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FK_Spieler" Type="Int32" />
+          <Property Name="FK_Anwesenheit" Type="Int32" />
+          <NavigationProperty Name="T_Anwesenheit" Relationship="Self.FK_T_SpielerAnwesenheit_T_Anwesenheit" FromRole="T_SpielerAnwesenheit" ToRole="T_Anwesenheit" />
+          <NavigationProperty Name="T_Spieler" Relationship="Self.FK_T_SpielerAnwesenheit_T_Spieler" FromRole="T_SpielerAnwesenheit" ToRole="T_Spieler" />
+        </EntityType>
+        <Association Name="FK_T_Mannschaft_SpielBericht">
+          <End Role="SpielBericht" Type="Self.SpielBericht" Multiplicity="0..1" />
+          <End Role="T_Mannschaft" Type="Self.T_Mannschaft" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpielBericht">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_Mannschaft">
+              <PropertyRef Name="FK_SpielBericht" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Absenzen_T_Spieler">
+          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
+          <End Role="T_Absenzen" Type="Self.T_Absenzen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Spieler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_Absenzen">
+              <PropertyRef Name="FK_Spieler" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_T_Spieler_T_Absenzen">
           <End Role="T_Absenzen" Type="Self.T_Absenzen" Multiplicity="0..1" />
           <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="*" />
@@ -387,15 +440,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_Spieler_T_Anwesenheit">
+        <Association Name="FK_T_SpielerAnwesenheit_T_Anwesenheit">
           <End Role="T_Anwesenheit" Type="Self.T_Anwesenheit" Multiplicity="0..1" />
-          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="*" />
+          <End Role="T_SpielerAnwesenheit" Type="Self.T_SpielerAnwesenheit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_Anwesenheit">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="T_Spieler">
+            <Dependent Role="T_SpielerAnwesenheit">
               <PropertyRef Name="FK_Anwesenheit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Bussen_T_Spieler">
+          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
+          <End Role="T_Bussen" Type="Self.T_Bussen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Spieler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_Bussen">
+              <PropertyRef Name="FK_Spieler" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -447,7 +512,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_SpielerAnwesenheit_T_Spieler">
+          <End Role="T_Spieler" Type="Self.T_Spieler" Multiplicity="0..1" />
+          <End Role="T_SpielerAnwesenheit" Type="Self.T_SpielerAnwesenheit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Spieler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_SpielerAnwesenheit">
+              <PropertyRef Name="FK_Spieler" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HilfsToolfuerTrainerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SpielBericht" EntityType="Self.SpielBericht" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="T_Absenzen" EntityType="Self.T_Absenzen" />
           <EntitySet Name="T_Anwesenheit" EntityType="Self.T_Anwesenheit" />
@@ -456,13 +534,26 @@
           <EntitySet Name="T_Inventar" EntityType="Self.T_Inventar" />
           <EntitySet Name="T_Mannschaft" EntityType="Self.T_Mannschaft" />
           <EntitySet Name="T_Spieler" EntityType="Self.T_Spieler" />
+          <EntitySet Name="T_SpielerAnwesenheit" EntityType="Self.T_SpielerAnwesenheit" />
+          <AssociationSet Name="FK_T_Mannschaft_SpielBericht" Association="Self.FK_T_Mannschaft_SpielBericht">
+            <End Role="SpielBericht" EntitySet="SpielBericht" />
+            <End Role="T_Mannschaft" EntitySet="T_Mannschaft" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Absenzen_T_Spieler" Association="Self.FK_T_Absenzen_T_Spieler">
+            <End Role="T_Spieler" EntitySet="T_Spieler" />
+            <End Role="T_Absenzen" EntitySet="T_Absenzen" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_Spieler_T_Absenzen" Association="Self.FK_T_Spieler_T_Absenzen">
             <End Role="T_Absenzen" EntitySet="T_Absenzen" />
             <End Role="T_Spieler" EntitySet="T_Spieler" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_Spieler_T_Anwesenheit" Association="Self.FK_T_Spieler_T_Anwesenheit">
+          <AssociationSet Name="FK_T_SpielerAnwesenheit_T_Anwesenheit" Association="Self.FK_T_SpielerAnwesenheit_T_Anwesenheit">
             <End Role="T_Anwesenheit" EntitySet="T_Anwesenheit" />
+            <End Role="T_SpielerAnwesenheit" EntitySet="T_SpielerAnwesenheit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Bussen_T_Spieler" Association="Self.FK_T_Bussen_T_Spieler">
             <End Role="T_Spieler" EntitySet="T_Spieler" />
+            <End Role="T_Bussen" EntitySet="T_Bussen" />
           </AssociationSet>
           <AssociationSet Name="FK_T_Spieler_T_Bussen" Association="Self.FK_T_Spieler_T_Bussen">
             <End Role="T_Bussen" EntitySet="T_Bussen" />
@@ -480,93 +571,32 @@
             <End Role="T_Spieler" EntitySet="T_Spieler" />
             <End Role="T_Mannschaft" EntitySet="T_Mannschaft" />
           </AssociationSet>
-          <EntitySet Name="SpielBericht" EntityType="HilfsToolfuerTrainerModel.SpielBericht" />
-          <AssociationSet Name="FK_T_Mannschaft_SpielBericht" Association="HilfsToolfuerTrainerModel.FK_T_Mannschaft_SpielBericht">
-            <End Role="SpielBericht" EntitySet="SpielBericht" />
-            <End Role="T_Mannschaft" EntitySet="T_Mannschaft" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_Absenzen_T_Spieler" Association="HilfsToolfuerTrainerModel.FK_T_Absenzen_T_Spieler">
+          <AssociationSet Name="FK_T_SpielerAnwesenheit_T_Spieler" Association="Self.FK_T_SpielerAnwesenheit_T_Spieler">
             <End Role="T_Spieler" EntitySet="T_Spieler" />
-            <End Role="T_Absenzen" EntitySet="T_Absenzen" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_Anwesenheit_T_Spieler" Association="HilfsToolfuerTrainerModel.FK_T_Anwesenheit_T_Spieler">
-            <End Role="T_Spieler" EntitySet="T_Spieler" />
-            <End Role="T_Anwesenheit" EntitySet="T_Anwesenheit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_Bussen_T_Spieler" Association="HilfsToolfuerTrainerModel.FK_T_Bussen_T_Spieler">
-            <End Role="T_Spieler" EntitySet="T_Spieler" />
-            <End Role="T_Bussen" EntitySet="T_Bussen" />
+            <End Role="T_SpielerAnwesenheit" EntitySet="T_SpielerAnwesenheit" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="SpielBericht">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VereinsNamen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SpielOrt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Taktik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Benotung" Type="Int32" />
-          <Property Name="Bericht" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FK_Mannschaft" Type="Int32" />
-          <NavigationProperty Name="T_Mannschaft" Relationship="HilfsToolfuerTrainerModel.FK_T_Mannschaft_SpielBericht" FromRole="SpielBericht" ToRole="T_Mannschaft" />
-          <Property Name="Gewonnen" Type="Boolean" />
-          <Property Name="Resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_T_Mannschaft_SpielBericht">
-          <End Type="HilfsToolfuerTrainerModel.SpielBericht" Role="SpielBericht" Multiplicity="0..1" />
-          <End Type="HilfsToolfuerTrainerModel.T_Mannschaft" Role="T_Mannschaft" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SpielBericht">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Mannschaft">
-              <PropertyRef Name="FK_SpielBericht" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_Absenzen_T_Spieler">
-          <End Type="HilfsToolfuerTrainerModel.T_Spieler" Role="T_Spieler" Multiplicity="0..1" />
-          <End Type="HilfsToolfuerTrainerModel.T_Absenzen" Role="T_Absenzen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Spieler">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Absenzen">
-              <PropertyRef Name="FK_Spieler" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_Anwesenheit_T_Spieler">
-          <End Type="HilfsToolfuerTrainerModel.T_Spieler" Role="T_Spieler" Multiplicity="0..1" />
-          <End Type="HilfsToolfuerTrainerModel.T_Anwesenheit" Role="T_Anwesenheit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Spieler">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Anwesenheit">
-              <PropertyRef Name="FK_Spieler" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_Bussen_T_Spieler">
-          <End Type="HilfsToolfuerTrainerModel.T_Spieler" Role="T_Spieler" Multiplicity="0..1" />
-          <End Type="HilfsToolfuerTrainerModel.T_Bussen" Role="T_Bussen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Spieler">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_Bussen">
-              <PropertyRef Name="FK_Spieler" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HilfsToolfuerTrainerModelStoreContainer" CdmEntityContainer="HilfsToolfuerTrainerEntities">
+          <EntitySetMapping Name="SpielBericht">
+            <EntityTypeMapping TypeName="HilfsToolfuerTrainerModel.SpielBericht">
+              <MappingFragment StoreEntitySet="SpielBericht">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VereinsNamen" ColumnName="VereinsNamen" />
+                <ScalarProperty Name="SpielOrt" ColumnName="SpielOrt" />
+                <ScalarProperty Name="Taktik" ColumnName="Taktik" />
+                <ScalarProperty Name="Benotung" ColumnName="Benotung" />
+                <ScalarProperty Name="Bericht" ColumnName="Bericht" />
+                <ScalarProperty Name="FK_Mannschaft" ColumnName="FK_Mannschaft" />
+                <ScalarProperty Name="Gewonnen" ColumnName="Gewonnen" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="HilfsToolfuerTrainerModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -596,7 +626,6 @@
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
                 <ScalarProperty Name="Datum" ColumnName="Datum" />
                 <ScalarProperty Name="istTraining" ColumnName="istTraining" />
-                <ScalarProperty Name="FK_Spieler" ColumnName="FK_Spieler" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -635,11 +664,11 @@
           <EntitySetMapping Name="T_Mannschaft">
             <EntityTypeMapping TypeName="HilfsToolfuerTrainerModel.T_Mannschaft">
               <MappingFragment StoreEntitySet="T_Mannschaft">
-                <ScalarProperty Name="FK_SpielBericht" ColumnName="FK_SpielBericht" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_Spieler" ColumnName="FK_Spieler" />
                 <ScalarProperty Name="FK_Inventar" ColumnName="FK_Inventar" />
                 <ScalarProperty Name="FK_Event" ColumnName="FK_Event" />
+                <ScalarProperty Name="FK_SpielBericht" ColumnName="FK_SpielBericht" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -651,23 +680,16 @@
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="TelefonNr" ColumnName="TelefonNr" />
                 <ScalarProperty Name="FK_Absenzen" ColumnName="FK_Absenzen" />
-                <ScalarProperty Name="FK_Anwesenheit" ColumnName="FK_Anwesenheit" />
                 <ScalarProperty Name="FK_Bussen" ColumnName="FK_Bussen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SpielBericht">
-            <EntityTypeMapping TypeName="HilfsToolfuerTrainerModel.SpielBericht">
-              <MappingFragment StoreEntitySet="SpielBericht">
-                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
-                <ScalarProperty Name="Gewonnen" ColumnName="Gewonnen" />
-                <ScalarProperty Name="FK_Mannschaft" ColumnName="FK_Mannschaft" />
-                <ScalarProperty Name="Bericht" ColumnName="Bericht" />
-                <ScalarProperty Name="Benotung" ColumnName="Benotung" />
-                <ScalarProperty Name="Taktik" ColumnName="Taktik" />
-                <ScalarProperty Name="SpielOrt" ColumnName="SpielOrt" />
-                <ScalarProperty Name="VereinsNamen" ColumnName="VereinsNamen" />
+          <EntitySetMapping Name="T_SpielerAnwesenheit">
+            <EntityTypeMapping TypeName="HilfsToolfuerTrainerModel.T_SpielerAnwesenheit">
+              <MappingFragment StoreEntitySet="T_SpielerAnwesenheit">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_Spieler" ColumnName="FK_Spieler" />
+                <ScalarProperty Name="FK_Anwesenheit" ColumnName="FK_Anwesenheit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

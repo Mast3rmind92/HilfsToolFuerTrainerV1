@@ -17,7 +17,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // GET: Spieler
         public ActionResult Index()
         {
-            var t_Spieler = db.T_Spieler.Include(t => t.T_Absenzen).Include(t => t.T_Anwesenheit).Include(t => t.T_Bussen);
+            var t_Spieler = db.T_Spieler.Include(t => t.T_Absenzen1).Include(t => t.T_Bussen1);
             return View(t_Spieler.ToList());
         }
 
@@ -40,7 +40,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
         public ActionResult Create()
         {
             ViewBag.FK_Absenzen = new SelectList(db.T_Absenzen, "ID", "Bezeichnung");
-            ViewBag.FK_Anwesenheit = new SelectList(db.T_Anwesenheit, "ID", "Bezeichnung");
             ViewBag.FK_Bussen = new SelectList(db.T_Bussen, "ID", "Grund");
             return View();
         }
@@ -50,7 +49,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Vorname,Nachname,TelefonNr,FK_Absenzen,FK_Anwesenheit,FK_Bussen")] T_Spieler t_Spieler)
+        public ActionResult Create([Bind(Include = "ID,Vorname,Nachname,TelefonNr,FK_Absenzen,FK_Bussen")] T_Spieler t_Spieler)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +59,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
             }
 
             ViewBag.FK_Absenzen = new SelectList(db.T_Absenzen, "ID", "Bezeichnung", t_Spieler.FK_Absenzen);
-            ViewBag.FK_Anwesenheit = new SelectList(db.T_Anwesenheit, "ID", "Bezeichnung", t_Spieler.FK_Anwesenheit);
             ViewBag.FK_Bussen = new SelectList(db.T_Bussen, "ID", "Grund", t_Spieler.FK_Bussen);
             return View(t_Spieler);
         }
@@ -78,7 +76,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 return HttpNotFound();
             }
             ViewBag.FK_Absenzen = new SelectList(db.T_Absenzen, "ID", "Bezeichnung", t_Spieler.FK_Absenzen);
-            ViewBag.FK_Anwesenheit = new SelectList(db.T_Anwesenheit, "ID", "Bezeichnung", t_Spieler.FK_Anwesenheit);
             ViewBag.FK_Bussen = new SelectList(db.T_Bussen, "ID", "Grund", t_Spieler.FK_Bussen);
             return View(t_Spieler);
         }
@@ -88,7 +85,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Vorname,Nachname,TelefonNr,FK_Absenzen,FK_Anwesenheit,FK_Bussen")] T_Spieler t_Spieler)
+        public ActionResult Edit([Bind(Include = "ID,Vorname,Nachname,TelefonNr,FK_Absenzen,FK_Bussen")] T_Spieler t_Spieler)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +94,6 @@ namespace HilfsToolFuerTrainerV1.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.FK_Absenzen = new SelectList(db.T_Absenzen, "ID", "Bezeichnung", t_Spieler.FK_Absenzen);
-            ViewBag.FK_Anwesenheit = new SelectList(db.T_Anwesenheit, "ID", "Bezeichnung", t_Spieler.FK_Anwesenheit);
             ViewBag.FK_Bussen = new SelectList(db.T_Bussen, "ID", "Grund", t_Spieler.FK_Bussen);
             return View(t_Spieler);
         }
