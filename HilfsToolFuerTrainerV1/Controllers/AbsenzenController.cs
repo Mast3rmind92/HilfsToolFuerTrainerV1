@@ -15,6 +15,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         private HilfsToolfuerTrainerEntities db = new HilfsToolfuerTrainerEntities();
 
         // GET: Absenzen
+        [Authorize]
         public ActionResult Index()
         {
             var t_Absenzen = db.T_Absenzen.Include(t => t.T_Spieler1);

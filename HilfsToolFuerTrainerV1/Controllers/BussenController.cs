@@ -15,6 +15,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         private HilfsToolfuerTrainerEntities db = new HilfsToolfuerTrainerEntities();
 
         // GET: Bussen
+        [Authorize]
         public ActionResult Index()
         {
             var t_Bussen = db.T_Bussen.Include(t => t.T_Spieler1);

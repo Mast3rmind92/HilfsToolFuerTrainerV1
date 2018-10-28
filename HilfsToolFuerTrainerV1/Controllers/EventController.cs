@@ -15,6 +15,7 @@ namespace HilfsToolFuerTrainerV1.Controllers
         private HilfsToolfuerTrainerEntities db = new HilfsToolfuerTrainerEntities();
 
         // GET: Event
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.T_Event.ToList());
